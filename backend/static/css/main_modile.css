@@ -1,0 +1,76 @@
+@font-face {
+  font-family: 'AstraSans';
+  src: url('../fonts/PT-Astra-Sans_Regular.ttf');
+}
+
+@media screen and (max-width: 360px) {
+
+.reference {
+    margin-right: 30px;
+    font-size: 30px;
+    text-decoration: none;
+    border: 1px solid black;
+    background-color: darkred;
+    color: white;
+    border-radius: 10px;
+}
+
+.main_container {
+    background-color: #EBE6D6;
+    font-family: AstraSans;
+
+    padding: 0% 0% 0%;
+    text-align: center;
+    align: center;
+
+}
+
+.main_table_container {
+    display: flex;
+    border: 6px double black;
+    overflow-x: scroll;
+}
+
+.main_text {
+    margin: 0px 0px 10px;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.main_table {
+    align: center;
+
+    margin: 0px 0px 0px;
+    padding: 0px;
+    overflow-x: scroll;
+
+}
+
+.table_head {
+    background-color: #163E6C;
+    color: white;
+
+    > * {
+    border-bottom: 1px solid black;
+    }
+}
+
+.table_cells {
+
+    font-size: 70%;
+    > * {
+        border: 1px solid black;
+    }
+}
+
+
+.guide_main_table_container {
+    justify-items: center;
+}
+
+.guide_main_table {
+    width: 100%;
+
+}
+
+}

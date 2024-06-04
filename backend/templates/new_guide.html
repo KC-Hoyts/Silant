@@ -1,0 +1,26 @@
+{% extends 'flatpages/index.html' %}
+
+
+{% block title %}
+Справочник
+{% endblock title  %}
+
+{% block content %}
+
+
+<h1 align="center"><b>Добавить/изменить справочник</b></h1>
+<hr>
+
+<div class="form-group" style="margin-bottom: 25px">
+    <form action="" method="post" >
+
+        {% csrf_token %}
+        {{ form.media }}
+        {{ form.as_p }}
+        <input type="submit" value="Сохранить" class="btn btn-secondary" align="center"/>
+
+    </form>
+<hr>
+</div>
+
+{% endblock content %}

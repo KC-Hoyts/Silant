@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>{% block title %} {% endblock title %}</title>
+        {% load static %}
+        {% block styles %}
+        {% endblock %}
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link rel="stylesheet" media="screen and (min-width: 361px)" href="{% static 'css/styles.css' %}">
+        <link rel="stylesheet" media="screen and (max-width: 360px)" href="{% static 'css/styles_mobile.css' %}">
+    </head>
+    <body>
+        <header class="header">
+            <img src="{% static 'img/Logo.jpg' %}" alt="Logo" class="logo">
+            <p class="contacts">Наши контакты: <span class="hspan">+7-8352-20-12-09 / Telegram</span></p>
+
+            {% if user.username %}
+                <p class="greeting">Ваш аккаунт: {{ user.username }}</p>
+                <a class="authorization"  href="{% url 'logout2' %}">Выйти</a>
+            {% else %}
+                <p class="greeting">Для работы войдите в аккаунт</p>
+                <a class="authorization"  href="{% url 'login' %}">Войти</a>
+            {% endif %}
+            <p class="headerText">Электронная сервисная книжка "Мой Силант"</p>
+      </header>
+
+        <!-- Page content-->
+        <div class="container">
+            {% if user.username %}
+            <div class="references">
+                <a class="vehicle_window" href="{% url 'vehicle_list'%}">Техника</a>
+                <a class="TM_window" href="{% url 'tm_list'%}">ТО</a>
+                <a class="claim_window" href="{% url 'claim_list'%}">Рекламации</a>
+                {% if user.is_superuser %}
+                    <a class="guides" href="{% url 'guides_list' %}">Справочники</a>
+                {% endif %}
+            </div>
+            {% endif %}
+            {% block content %}
+
+            {% endblock content %}
+        </div>
+
+        <footer class="footer">
+            <p class="contacts">Контакты: <span class="hspan">+7-8352-20-12-09 / Telegram</span></p>
+            <p class="footerText">Мой Силант, 2024.</p>
+        </footer>
+
+    </body>
+</html>

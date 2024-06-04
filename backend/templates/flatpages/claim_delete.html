@@ -1,0 +1,25 @@
+{% extends 'flatpages/index.html' %}
+
+
+{% block title %}
+Удаление претензии
+{% endblock title  %}
+
+{% block content %}
+
+
+<h1 align="center"><b>Удаление заявки на неисправность техники</b></h1>
+<hr>
+<div align="center" class="form-group" >
+    <form action="" method="post">
+        <h2 align="center" style=><b>Вы уверены, что хотите безвозвратно удалить заявку на неисправность?</b> <br><br><i style="color: #660000">- {{ object.CC_vehicle_SN }} -</i> </h2>
+        {% csrf_token %}
+
+        <input type="submit" value="Удалить заявку" class="btn btn-danger" align="center"/>
+        <br><br>
+        <p>Для отмены удаления нажмите вверху браузера кнопку "назад"</p>
+    </form>
+<hr>
+</div>
+
+{% endblock content %}

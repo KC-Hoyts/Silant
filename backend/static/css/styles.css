@@ -1,0 +1,160 @@
+@import "css/styles_mobile.css"
+
+@font-face {
+  font-family: 'AstraSans';
+  src: url('../fonts/PT-Astra-Sans_Regular.ttf');
+}
+
+body {
+    padding: 0px;
+    margin: 0px;
+    overflow-x:hidden;
+}
+
+@media screen and (min-width: 361px) {
+
+
+    .header {
+      display: grid;
+      background-color: #163E6C;
+      font-family: AstraSans;
+      font-weight: bold;
+      color: white;
+
+      justify-items: center;
+      align-items: center;
+      text-align: center;
+      font-size: 25px;
+      width: 100%;
+      column-gap: 5%;
+      grid-template-areas:
+      "logo contacts contacts  greet greet"
+      "logo htext htext htext  auth";
+    }
+
+.logo {
+  margin: 15%;
+  width: 100%;
+  max-width: 130px;
+  grid-area: logo;
+}
+
+.headerText {
+  font-size: 45px;
+  margin: 0px;
+  padding: 10px 0px;
+  width: 100%;
+  grid-area: htext;
+  text-align: left;
+}
+
+.hspan {
+  font-weight: normal;
+}
+
+.contacts {
+  width: fit-content;
+  grid-area: contacts;
+}
+
+.authorization {
+  grid-area: auth;
+  color: white;
+  background-color: red;
+  border: 1px solid white;
+  border-radius: 10px;
+  padding: 10%;
+  margin-right: 80%;
+  text-decoration: none;
+}
+
+.greeting {
+  grid-area: greet;
+  font-size: 15px;
+  margin: 0px;
+  padding: 10px 0px;
+  width: 100%;
+  text-align: left;
+}
+
+
+.container {
+    background-color: #EBE6D6;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 1%;
+
+  align: center;
+  justify-content: center;
+}
+
+.references {
+    font-size: 25px;
+    > * {
+        border: 1px solid black;
+        padding: 2px 10px;
+        border-radius: 10px;
+        text-decoration: none;
+        color: white;
+        background-color: #163E6C;
+    }
+}
+.vehicle_window {
+}
+
+.TM_window {
+    margin: 0px 20px;
+}
+
+.claim_window {
+    margin: 0px 20px 0px 0px;
+}
+
+
+.footer {
+  /* height: 100%; */
+  font-family: AstraSans;
+  color: white;
+  font-weight: bold;
+  display: grid;
+  position: sticky;
+  bottom: 0;
+  width: 100%;
+  padding: 0px;
+  background-color: #D20A11;
+  justify-items: center;
+  font-size: 20px;
+  grid-template-areas:
+    "contacts ftext";
+    > * {
+      padding: 0px;
+      margin: 5px;
+    }
+}
+
+.footerText {
+  grid-area: ftext;
+}
+
+
+.guide__info_container {
+    margin: 2% 10%;
+    padding: 1% 2% 3%;
+    border: solid 1px black;
+    vertical-align: start;
+}
+
+
+.guide_text {
+    font-size: 130%;
+    font-weight: bold;
+    font-family: AstraSans;
+}
+
+
+.guide_description {
+    font-size: 120%;
+    font-family: AstraSans;
+}
+
+}

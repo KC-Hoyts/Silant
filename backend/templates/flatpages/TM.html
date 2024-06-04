@@ -1,0 +1,67 @@
+{% extends 'flatpages/index.html' %}
+
+{% load static %}
+{% block styles %}
+<link rel="stylesheet" media="screen and (min-width: 361px)" href="{% static 'css/main.css' %}">
+        <link rel="stylesheet" media="screen and (max-width: 360px)" href="{% static 'css/main_mobile.css' %}">
+{% endblock %}
+
+{% block title %}
+Silant | Commercial application
+{% endblock title  %}
+
+
+{% block content %}
+<div class="main_container">
+    <p class="main_text">Список технического обслуживания техники</p>
+    {% if perms.mainApp.add_technicalmaintenance %}
+        <a class="reference" href="{% url 'tm_create' %}">- Добавить новый заказ на ТО -</a>
+    {% endif %}
+
+
+    <form action="" method="get">
+        {{ filterset.form.as_p }}
+        <input type="submit" value="Найти" />
+   </form>
+    <p>Найдено -<b>{{ found }}</b>-. Результат поиска:</p>
+
+    <div class="main_table_container">
+        <table class="main_table">
+            <thead>
+                <tr class="table_head">
+                    <th>Вид ТО</th>
+                    <th>Дата проведения ТО</th>
+                    <th>Наработка, м/час</th>
+                    <th>№ заказ-наряда</th>
+                    <th>Дата заказ-наряда</th>
+                    <th>Организация, проводившая ТО</th>
+                    <th>Машина</th>
+                    <th>Сервисная компания</th>
+                    {% if perms.mainApp.delete_technicalmaintenance %}
+                        <th>Удаление</th>
+                    {% endif %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for one_TM in TM %}
+                    <tr class="table_cells">
+                        <td><a href="{% url 'gtm_view' one_TM.TM_type_id %}" target="_blank">{{ one_TM.TM_type}}</a></td>
+                        <td>{{ one_TM.TM_date }}</td>
+                        <td>{{ one_TM.TM_operating_hours }}</td>
+                        <td>{{ one_TM.TM_invoice }}</td>
+                        <td>{{ one_TM.TM_invoice_date }}</td>
+                        <td>{{ one_TM.TM_responsible_company}}</td>
+                        <td>{{ one_TM.TM_vehicle_SN }}</td>
+                        <td>{{ one_TM.TM_service_company }}</td>
+                        {% if perms.mainApp.delete_technicalmaintenance %}
+                            <td><a href="{% url 'tm_delete' one_TM.id %}">Удалить</a></td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+    </div>
+</div>
+
+{% endblock content %}

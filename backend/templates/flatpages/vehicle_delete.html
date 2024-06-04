@@ -1,0 +1,25 @@
+{% extends 'flatpages/index.html' %}
+
+
+{% block title %}
+Удаление заказа
+{% endblock title  %}
+
+{% block content %}
+
+
+<h1 align="center"><b>Удаление заказа на технику</b></h1>
+<hr>
+<div align="center" class="form-group" >
+    <form action="" method="post">
+        <h2 align="center" style=><b>Вы уверены, что хотите безвозвратно удалить данный заказ?</b> <br><br><i style="color: #660000">- {{ object.vehicle_model }}, {{ object.vehicle_SN }} -</i> </h2>
+        {% csrf_token %}
+
+        <input type="submit" value="Удалить заказ" class="btn btn-danger" align="center"/>
+        <br><br>
+        <p>Для отмены удаления нажмите вверху браузера кнопку "назад"</p>
+    </form>
+<hr>
+</div>
+
+{% endblock content %}

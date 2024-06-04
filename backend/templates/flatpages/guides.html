@@ -1,0 +1,53 @@
+{% extends 'flatpages/index.html' %}
+
+{% load static %}
+{% block styles %}
+<link rel="stylesheet" media="screen and (min-width: 361px)" href="{% static 'css/main.css' %}">
+        <link rel="stylesheet" media="screen and (max-width: 360px)" href="{% static 'css/main_mobile.css' %}">
+{% endblock %}
+
+{% block title %}
+Silant | Commercial application
+{% endblock title  %}
+
+
+{% block content %}
+<div class="main_container">
+<p class="main_text">Список справочников:</p>
+    </div>
+    <div class="guide_main_table_container">
+        <table class="guide_main_table">
+
+            <tr>
+                <th><a class="" href="{% url 'gv' %}">Техника</a></th>
+            </tr>
+            <tr>
+                <th><a class="" href="{% url 'ge' %}">Двигателя</a></th>
+            </tr>
+            <tr>
+                <th><a class="" href="{% url 'gt' %}">Трансмиссии</a></th>
+            </tr>
+            <tr>
+                <th><a class="" href="{% url 'gda' %}">Ведущие мосты</a></th>
+            </tr>
+            <tr>
+                <th><a class="" href="{% url 'gca' %}">Управляемые мосты</a></th>
+            </tr>
+            <tr>
+                <th><a class="" href="{% url 'gtm' %}">Техническое обслуживание</a></th>
+            </tr>
+            <tr>
+                <th><a class="" href="{% url 'gtmc' %}">Компании по ТО</a></th>
+            </tr>
+            <tr>
+                <th><a class="" href="{% url 'gbu' %}">Узлы</a></th>
+            </tr>
+            <tr>
+                <th><a class="" href="{% url 'grt' %}">Тип ремонта</a></th>
+            </tr>
+
+        </table>
+    </div>
+</div>
+
+{% endblock content %}

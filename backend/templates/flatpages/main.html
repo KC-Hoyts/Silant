@@ -1,0 +1,93 @@
+{% extends 'flatpages/index.html' %}
+
+{% load static %}
+{% block styles %}
+<link rel="stylesheet" media="screen and (min-width: 361px)" href="{% static 'css/main.css' %}">
+        <link rel="stylesheet" media="screen and (max-width: 360px)" href="{% static 'css/main_mobile.css' %}">
+{% endblock %}
+
+{% block title %}
+Silant | Commercial application
+{% endblock title  %}
+
+
+{% block content %}
+<div class="main_container">
+<p class="main_text">Проверьте комлпектацию и технические характеристики техники Силант</p>
+
+    <div class="main_search_container">
+        <p class="main_search_text">Информация о комплектации и технических характеристиках Вашей техники</p>
+        {% if perms.mainApp.add_vehicle %}
+        <a  class="reference" href="{% url 'vehicle_create' %}">- Добавить новый заказ на технику- </a>
+        {% endif %}
+    </div>
+
+    <form action="" method="get">
+        {{ filterset.form.as_p }}
+        <input type="submit" value="Найти" />
+   </form>
+    <p>Найдено -<b>{{ found }}</b>-. Результат поиска:</p>
+
+            <div class="main_table_container">
+                <table class="main_table">
+                    <thead>
+                        <tr class="table_head">
+                            <th>Модель техники</th>
+                            <th>Зав. № машины</th>
+                            <th>Модель двигателя</th>
+                            <th>Зав. № двигателя</th>
+                            <th>Модель трансмиссии</th>
+                            <th>Зав. № трансмиссии</th>
+                            <th>Модель ведущего моста</th>
+                            <th>Зав. № ведущего моста</th>
+                            <th>Модель управляемого моста</th>
+                            <th>Зав. № управляемого моста</th>
+                            {% if user.username %}
+                                <th>Договор поставки №, дата</th>
+                                <th>Дата отгрузки с завода</th>
+                                <th>Грузополучатель (конечный потребитель)</th>
+                                <th>Адрес поставки (эксплуатации)</th>
+                                <th>Комплектация (доп. опции)</th>
+                                <th>Клиент</th>
+                                <th>Сервисная компания</th>
+                                {% if perms.mainApp.delete_vehicle %}
+                                    <th>Удаление</th>
+                                {% endif %}
+                            {% endif %}
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for vehicle in vehicles %}
+                            <tr class="table_cells">
+                                <td><a href="{% url 'gv_view' vehicle.vehicle_model_id %}" target="_blank">{{ vehicle.vehicle_model}}</a></td>
+                                <td>{{ vehicle.vehicle_SN }}</td>
+                                <td><a href="{% url 'ge_view' vehicle.engine_model_id %}" target="_blank">{{ vehicle.engine_model }}</a></td>
+                                <td>{{ vehicle.engine_SN }}</td>
+                                <td><a href="{% url 'gt_view' vehicle.transmission_model_id %}" target="_blank">{{ vehicle.transmission_model}}</a></td>
+                                <td>{{ vehicle.transmission_SN}}</td>
+                                <td><a href="{% url 'gda_view' vehicle.driving_axle_model_id %}" target="_blank">{{ vehicle.driving_axle_model }}</a></td>
+                                <td>{{ vehicle.driving_axle_SN }}</td>
+                                <td><a href="{% url 'gca_view' vehicle.control_axle_model_id %}" target="_blank">{{ vehicle.control_axle_model }}</a></td>
+                                <td>{{ vehicle.control_axle_SN }}</td>
+                                {% if user.username %}
+                                    <td>{{ vehicle.invoice }}</td>
+                                    <td>{{ vehicle.shipment_date }}</td>
+                                    <td>{{ vehicle.final_user }}</td>
+                                    <td>{{ vehicle.address }}</td>
+                                    <td>{{ vehicle.vehicle_configuration }}</td>
+                                    <td>{{ vehicle.client }}</td>
+                                    <td>{{ vehicle.service_company }}</td>
+                                    {% if perms.mainApp.delete_vehicle %}
+                                        <th><a href="{% url 'vehicle_delete' vehicle.id %}">Удалить</a></th>
+                                    {% endif %}
+                                {% endif %}
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+
+                </table>
+            </div>
+</div>
+
+{% endblock content %}

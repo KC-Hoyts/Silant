@@ -1,0 +1,18 @@
+{% extends 'flatpages/index.html' %}
+
+
+{% block title %}
+Справка | {{ one_guide_object.name }}
+{% endblock title %}
+
+
+{% block content %}
+<div align="center" class="guide__info_container">
+
+        <p class="guide_text">Справочная информация по объекту "{{ one_guide_object.name }}":</p>
+        <hr>
+        <p class="guide_description">{{ one_guide_object.description }}</p>
+
+</div>
+
+{% endblock content %}

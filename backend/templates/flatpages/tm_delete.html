@@ -1,0 +1,25 @@
+{% extends 'flatpages/index.html' %}
+
+
+{% block title %}
+Удаление заказа на ТО
+{% endblock title  %}
+
+{% block content %}
+
+
+<h1 align="center"><b>Удаление заказа на техническое обслуживание</b></h1>
+<hr>
+<div align="center" class="form-group" >
+    <form action="" method="post">
+        <h2 align="center" style=><b>Вы уверены, что хотите безвозвратно удалить запись о ТО?</b> <br><br><i style="color: #660000">- {{ object.TM_invoice }} -</i> </h2>
+        {% csrf_token %}
+
+        <input type="submit" value="Удалить заказ" class="btn btn-danger" align="center"/>
+        <br><br>
+        <p>Для отмены удаления нажмите вверху браузера кнопку "назад"</p>
+    </form>
+<hr>
+</div>
+
+{% endblock content %}

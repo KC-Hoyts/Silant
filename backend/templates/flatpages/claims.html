@@ -1,0 +1,78 @@
+{% extends 'flatpages/index.html' %}
+
+{% load static %}
+{% block styles %}
+<link rel="stylesheet" media="screen and (min-width: 361px)" href="{% static 'css/main.css' %}">
+        <link rel="stylesheet" media="screen and (max-width: 360px)" href="{% static 'css/main_mobile.css' %}">
+{% endblock %}
+
+{% block title %}
+Silant | Commercial application
+{% endblock title  %}
+
+
+{% block content %}
+<div class="main_container">
+    <p class="main_text">Список заявок о неисправности техники</p>
+    {% if perms.mainApp.add_clientclaim %}
+    <a class="reference"  href="{% url 'claim_create' %}">- Создать заявку о неисправности техники -</a>
+    {% endif %}
+
+
+    <form action="" method="get">
+        {{ filterset.form.as_p }}
+        <input type="submit" value="Найти" />
+   </form>
+    <p>Найдено -<b>{{ found }}</b>-. Результат поиска:</p>
+
+    <div class="main_table_container">
+        <table class="main_table">
+            <thead>
+                <tr class="table_head">
+                    <th>Дата отказа</th>
+                    <th>Наработка, м/час</th>
+                    <th>Узел отказа</th>
+                    <th>Описание отказа</th>
+                    <th>Способ восстановления</th>
+                    <th>Используемые запасные части</th>
+                    <th>Дата восстановления</th>
+                    <th>Время простоя техники</th>
+                    <th>Mашина</th>
+                    <th>Cервисная компания</th>
+                    {% if perms.mainApp.change_clientclaim %}
+                        <th>Редактирование</th>
+                    {% endif %}
+                    {% if perms.mainApp.delete_clientclaim %}
+                        <th>Удаление</th>
+                    {% endif %}
+
+                </tr>
+            </thead>
+            <tbody>
+                {% for claim in claims %}
+                    <tr class="table_cells">
+                        <td>{{ claim.CC_breakdown_date }}</td>
+                        <td>{{ claim.CC_operating_hours }}</td>
+                        <td><a href="{% url 'gbu_view' claim.CC_breakdown_unit_id %}" target="_blank">{{ claim.CC_breakdown_unit }}</a></td>
+                        <td>{{ claim.CC_breakdown_description }}</td>
+                        <td><a href="{% url 'grt_view' claim.CC_repair_type_id %}" target="_blank">{{ claim.CC_repair_type }}</a></td>
+                        <td>{{ claim.CC_spares_list }}</td>
+                        <td>{{ claim.CC_recovery_date }}</td>
+                        <td>{{ claim.CC_vehicle_downtime }}</td>
+                        <td>{{ claim.CC_vehicle_SN }}</td>
+                        <td>{{ claim.CC_service_company }}</td>
+                        {% if perms.mainApp.change_clientclaim %}
+                            <td><a href="{% url 'claim_update' claim.id %}">Изменить</a></td>
+                        {% endif %}
+                        {% if perms.mainApp.delete_clientclaim %}
+                            <td><a href="{% url 'claim_delete' claim.id %}">Удалить</a></td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+    </div>
+</div>
+
+{% endblock content %}
